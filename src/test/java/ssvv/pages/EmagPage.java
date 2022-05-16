@@ -30,8 +30,11 @@ public class EmagPage extends PageObject {
 
     String closeCartPopupSelector = "body > div.gdpr-cookie-banner.js-gdpr-cookie-banner.pad-sep-xs.pad-hrz-none.login-view.login-view-ro.show > div > button > i";
 
-    String cartPopupElementNameSelector = "body > div.ph-modal.modal.fade.product-purchased-modal.modal-version-.in > div > div > div.modal-body.modal-content-extra-padding.pad-sep-xs.hidden-xs > div > div.table-cell.col-xs-12.col-sm-12.col-md-9 > div > div.table-cell.col-xs-8.col-sm-8 > span";
+    @FindBy(xpath = "//*[@id=\"vendorsContainer\"]/div[1]/div[1]/div/div[2]/div[1]/div[1]/a")
+    WebElementFacade itemTitleFromCart;
 
+
+    String viewCartButtonSelector = "body > div.ph-modal.modal.fade.product-purchased-modal.modal-version-.in > div > div > div.modal-body.modal-content-extra-padding.pad-sep-xs.hidden-xs > div > div.table-cell.col-xs-12.col-sm-2.col-md-2.hidden-xs.hidden-sm > a";
     public void enter_keywords(String keyword) {
         searchInput.type(keyword);
     }
@@ -66,9 +69,13 @@ public class EmagPage extends PageObject {
 
     public String getTitleFromCartPopup()
     {
+        return itemTitleFromCart.getText();
+    }
+
+    public void goToCart()
+    {
         WebDriverWait wait = new WebDriverWait(getDriver(),10);
-        WebElement cartTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.cssSelector(cartPopupElementNameSelector)));
-        return cartTitle.getText();
+        WebElement cartPopup = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(viewCartButtonSelector)));
+        cartPopup.click();
     }
 }

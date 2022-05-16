@@ -52,6 +52,12 @@ public class EmagUserSteps {
     }
 
     @Step
+    public void goToCart()
+    {
+        emagPage.goToCart();
+    }
+
+    @Step
     public void should_see_title(String title) {
         assertThat(emagPage.getTitleFromSearchPage(), containsString(title));
     }

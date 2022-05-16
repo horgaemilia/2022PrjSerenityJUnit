@@ -65,6 +65,7 @@ public class EmagDDT {
         closeCartPopup();
         endUser.looks_for(getName());
         endUser.addToCart();
+        endUser.goToCart();
         endUser.should_see_cart_title(getTitle());
     }
 
